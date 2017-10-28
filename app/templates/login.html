@@ -1,15 +1,26 @@
 <!-- extend from base layout -->
 {% extends "base.html" %}
 {% block content %}
-  <div class=container>
-  <h1>Sign In</h1>
+<style>
+.alert {
+  width:40%;
+  font-size:10px;
+}
+</style>
+<div class=container>
+  <h2>Log In</h2>
   <form action="" method="post" name="login">
-      {{ form.hidden_tag() }}
+    {{ form.hidden_tag() }}
+    <div class="form-group">
       <p>
-          Please enter your OpenID:<br>
-          {{ form.openid(size=80) }}<br>
+        <input type="text" class="form-control" id="openid" name="openid" placeholder="Open ID">
+        {% for error in form.openid.errors %}
+        <p class="alert alert-warning">[{{ error }}]</p>
+        {% endfor %}
       </p>
       <p>{{ form.remember_me }} Remember Me</p>
-      <p><input type="submit" class='btn btn-warning' value="Sign In"></p>
+    </div>
+    <p><input type="submit" class='btn btn-warning' value="Sign In"></p>
   </form>
+</div>
 {% endblock %}

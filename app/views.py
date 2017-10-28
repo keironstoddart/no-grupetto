@@ -16,12 +16,16 @@ def login():
     if form.validate_on_submit():
         print('OpenID:',form.openid.data)
         print('Remember Me:',form.remember_me.data)
-        return redirect('/index')
+        return redirect('/dashboard')
     return render_template(
                 'login.html',
                 title='Sign In',
                 form=form
                 )
+
+@app.route('/dashboard')
+def dashboard():
+    return 'dashboard'
 
 @app.route('/')
 @app.route('/index')
@@ -37,7 +41,7 @@ def index():
             )
         athlete = client.get_athlete()
         # bring them to the login page for account creation
-        return login()
+        return redirect('/login')
     return render_template('index.html')
 
 @app.route('/connect')
