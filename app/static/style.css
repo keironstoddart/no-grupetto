@@ -1,0 +1,49 @@
+#text {
+  font-family:'menlo';
+  padding-left:20px;
+}
+td, th {
+  padding: 1px 4px;
+}
+form {
+  font-family:'menlo';
+}
+#footer {
+  font-family:'menlo';
+  padding:20px;
+}
+.thing-form {
+    margin: 20px 0;
+}
+.btn
+{
+    font-size: 18px;
+    color:white;
+}
+.btn:hover
+{
+    font-size: 18px;
+    color:white;
+}
+#banner {
+    border-bottom: none;
+}
+#banner h1 {
+    font-size: 60px;
+    line-height: 1;
+    letter-spacing: -1px;
+}
+.hero-unit {
+    position: relative;
+    padding: 20px 10px;
+    color: #F5F5F5;
+    text-align: center;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+    background: #FF8633;
+}
+.navbar-text {
+    margin-left: 15px;
+}
+#content {
+  padding: 10px;
+}

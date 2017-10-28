@@ -1,0 +1,33 @@
+<head>
+  <link rel="stylesheet" mead='screen' href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+  <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+  <title>No Grupetto</title>
+</head>
+<nav class="navbar navbar-default navbar-static-top" style='background-color:white;' role="navigation">
+  <div>
+    <a class="navbar-brand" href="/login" style="font-family:menlo;color:#FF8633;">Sign In</a>
+  </div>
+</nav>
+<header class="hero-unit" id="banner">
+  <div class="container">
+    <h1>No Groupetto</h1>
+    <p class="lead">Never get dropped again.</p>
+  </div>
+</header>
+<div class=container style='padding-top:30px'>
+    <h4>What is No Grupetto?</h4>
+    No <a href = 'https://en.wikipedia.org/wiki/Autobus_(cycling)'>Grupetto</a> is a cycling community that connects cyclists of similar
+    speeds. Never get dropped on a ride ever again!
+    <h4 style='padding-top:30px'>How does it work?</h4>
+    No Grupetto uses machine learning algorithms to analyze your <a href='https://www.strava.com/'>Strava</a> logged rides and
+    match you with other riders of similar skill and close proximity.
+    Make some friends, go on some rides, and come out a better rider than you were before.
+    No Grupetto analyzes your performances in real time to give you better matches as you become
+    a better rider.
+    <h4 style='padding-top:30px'>Sounds cool to me! How can I join?</h4>
+    Awesome! All you need to join is to give No Grupetto access to your <a href='https://www.strava.com/'>Strava</a> rides.
+    Click the join button below!
+</div>
+<div class=container style='padding-top:30px;text-align:center;'>
+  <a href='https://www.strava.com/oauth/authorize?client_id=7626&response_type=code&redirect_uri=http://127.0.0.1:5000&approval_prompt=force' class="btn btn-block btn-lg  btn-warning">Join</a>
+</div>

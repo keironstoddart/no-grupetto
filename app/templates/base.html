@@ -1,0 +1,28 @@
+<!-- Provides a Wrapper around Visualizations -->
+<!doctype html>
+<html>
+<head>
+  <link rel="stylesheet" mead='screen' href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+  <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+  {% block head %}
+  <title>{% block title %}{% endblock %}No Grupetto</title>
+  {% endblock %}
+</head>
+<nav class="navbar navbar-default navbar-static-top" style='background-color: #FF8633;' role="navigation">
+  <div>
+    <a class="navbar-brand" href="/" style="font-family:menlo;color:white;">No Grupetto</a>
+  </div>
+</nav>
+<body>
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul>
+        {% for message in messages %}
+          <li>{{ message }} </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+  <div id="content">{% block content %}{% endblock %}</div>
+</body>
+</html>
