@@ -1,2 +1,5 @@
 WTF_CSRF_ENABLED = True
 SECRET_KEY = 'auwnc237al2'
+
+SQLALCHEMY_DATABASE_URI = 'postgresql://localhost/grupetto'
+SQLALCHEMY_TRACK_MODIFICATIONS = False

@@ -14,7 +14,8 @@ MY_STRAVA_CLIENT_SECRET = '4b2e2887eb145e7e3bbeeaada7ee415ad19b9c92'
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        print('OpenID:',form.openid.data)
+        print('Name:',form.name.data)
+        print('Password:',form.password.data)
         print('Remember Me:',form.remember_me.data)
         return redirect('/dashboard')
     return render_template(

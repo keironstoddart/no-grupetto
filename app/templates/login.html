@@ -12,12 +12,18 @@
   <form action="" method="post" name="login">
     {{ form.hidden_tag() }}
     <div class="form-group">
-      <p>
-        <input type="text" class="form-control" id="openid" name="openid" placeholder="Open ID">
-        {% for error in form.openid.errors %}
+        <p>
+          <input type="text" class="form-control" id="name" name="name" placeholder="Name">
+        </p>
+        {% for error in form.name.errors %}
         <p class="alert alert-warning">[{{ error }}]</p>
-        {% endfor %}
-      </p>
+        {% endfor %}<br>
+        <p>
+          <input type="text" class="form-control" id="password" name="password" placeholder="Password">
+        </p>
+        {% for error in form.password.errors %}
+        <p class="alert alert-warning">[{{ error }}]</p>
+        {% endfor %}<br>
       <p>{{ form.remember_me }} Remember Me</p>
     </div>
     <p><input type="submit" class='btn btn-warning' value="Sign In"></p>
