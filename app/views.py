@@ -87,4 +87,8 @@ def connect():
 
 @app.route('/authorization')
 def authorization():
-    return 'success'
+    if g.user is not None and g.user.is_authenticated:
+        return redirect(url_for('dashboard'))
+    else:
+        strava = 'https://www.strava.com/oauth/authorize?client_id=7626&response_type=code&redirect_uri=http://127.0.0.1:5000&approval_prompt=force'
+        return redirect(strava)
