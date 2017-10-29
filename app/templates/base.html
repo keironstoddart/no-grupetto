@@ -10,19 +10,19 @@
 </head>
 <nav class="navbar navbar-default navbar-static-top" style='background-color: #FF8633;' role="navigation">
   <div>
-    <a class="navbar-brand" href="/" style="font-family:menlo;color:white;">No Grupetto</a>
+    <a class="navbar-brand" href="/logout" style="font-family:menlo;color:white;">Log Out</a>
   </div>
 </nav>
 <body>
-  {% with messages = get_flashed_messages() %}
+  <div id="content">{% block content %}{% endblock %}</div>
+  <div class=container>
+  {% with messages = get_flashed_messages(with_categories=True) %}
     {% if messages %}
-      <ul>
-        {% for message in messages %}
-          <li>{{ message }} </li>
-        {% endfor %}
-      </ul>
+      {% for category, message in messages %}
+        <p class="{{ category }}">{{ message }}</p>
+      {% endfor %}
     {% endif %}
   {% endwith %}
-  <div id="content">{% block content %}{% endblock %}</div>
+  </div>
 </body>
 </html>

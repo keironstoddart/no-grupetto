@@ -1,12 +1,6 @@
 <!-- extend from base layout -->
 {% extends "base.html" %}
 {% block content %}
-<style>
-.alert {
-  width:40%;
-  font-size:10px;
-}
-</style>
 <div class=container>
   <h2 style='padding-bottom:20px;'>Log In</h2>
   <form action="" method="post" name="login">
@@ -16,13 +10,13 @@
           <input type="text" class="form-control" id="name" name="name" placeholder="Name">
         </p>
         {% for error in form.name.errors %}
-        <p class="alert alert-warning">[{{ error }}]</p>
+        <p class="alert alert-danger">[{{ error }}]</p>
         {% endfor %}
         <p>
           <input type="text" class="form-control" id="password" name="password" placeholder="Password">
         </p>
         {% for error in form.password.errors %}
-        <p class="alert alert-warning">[{{ error }}]</p>
+        <p class="alert alert-danger">[{{ error }}]</p>
         {% endfor %}
       <p>{{ form.remember_me }} Remember Me</p>
     </div>

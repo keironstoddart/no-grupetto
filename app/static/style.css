@@ -1,6 +1,5 @@
 #text {
   font-family:'menlo';
-  padding-left:20px;
 }
 td, th {
   padding: 1px 4px;
@@ -46,4 +45,7 @@ form {
 }
 #content {
   padding: 10px;
+}
+.alert {
+  font-size:12px;
 }
