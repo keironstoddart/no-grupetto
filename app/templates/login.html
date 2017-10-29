@@ -17,13 +17,13 @@
         </p>
         {% for error in form.name.errors %}
         <p class="alert alert-warning">[{{ error }}]</p>
-        {% endfor %}<br>
+        {% endfor %}
         <p>
           <input type="text" class="form-control" id="password" name="password" placeholder="Password">
         </p>
         {% for error in form.password.errors %}
         <p class="alert alert-warning">[{{ error }}]</p>
-        {% endfor %}<br>
+        {% endfor %}
       <p>{{ form.remember_me }} Remember Me</p>
     </div>
     <p><input type="submit" class='btn btn-warning' value="Sign In"></p>
