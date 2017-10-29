@@ -6,8 +6,8 @@
 <body style="background-color:FF8633;">
   <div class=square>
     <div style='padding:20px;'>
-      <h2 style='padding-bottom:20px;'>Log In</h2>
-      <form action="" method="post" name="login">
+      <h2 style='padding-bottom:20px;'>Sign Up</h2>
+      <form action="" method="post" name="signup">
         {{ form.hidden_tag() }}
         <div class="form-group">
             <p>
@@ -24,15 +24,17 @@
             {% endfor %}
           <p>{{ form.remember_me }} Remember Me</p>
         </div>
-        <p><input type="submit" class='btn btn-warning' value="Log In"></p>
+        <p><input type="submit" class='btn btn-warning' value="Sign Up"></p>
       </form>
-      {% with messages = get_flashed_messages(with_categories=True) %}
-        {% if messages %}
-          {% for category, message in messages %}
-            <p class="{{ category }}">{{ message }}</p>
-          {% endfor %}
-        {% endif %}
-      {% endwith %}
     <div>
+    <div class=container>
+    {% with messages = get_flashed_messages(with_categories=True) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <p class="{{ category }}">{{ message }}</p>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    </div>
   </div>
 </body>

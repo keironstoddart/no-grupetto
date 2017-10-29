@@ -3,6 +3,7 @@ from flask import render_template, flash, redirect, session, url_for, request, g
 from flask_login import login_user, logout_user, current_user, login_required
 # forms
 from .forms import LoginForm
+from .forms import SignupForm
 # models
 from .models import Athlete
 # Strava
@@ -26,6 +27,12 @@ def logout():
     logout_user()
     return redirect(url_for('index'))
 
+@app.route('/signup', methods=['GET','POST'])
+def signup():
+    form = SignupForm()
+    return render_template('signup.html', form=form)
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     # check to see if user is already logged in
@@ -34,7 +41,8 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         name = form.name.data
-        # todo: check to see if user exists
+        # check to see if user exists
+        # on sign up page make sure users cannot sign up with same user name
         athlete = Athlete.query.filter_by(name=name).first()
         if athlete is None:
             flash('Athlete does not exist, please join now.',category='alert alert-warning')
@@ -67,9 +75,11 @@ def index():
             code=code
             )
         print('access token:',access_token)
+        # store token in session variable for database write on sign up page
+        session['token'] = access_token
         athlete = client.get_athlete()
         # bring them to the login page for account creation
-        return redirect('/login')
+        return redirect(url_for('signup'))
     return render_template('index.html')
 
 @app.route('/connect')
