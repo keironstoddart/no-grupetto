@@ -40,6 +40,7 @@ def index():
             client_secret=MY_STRAVA_CLIENT_SECRET,
             code=code
             )
+        print('access token:',access_token)
         athlete = client.get_athlete()
         # bring them to the login page for account creation
         return redirect('/login')
