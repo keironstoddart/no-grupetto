@@ -10,7 +10,12 @@ from .models import Activity
 # Strava
 from stravalib.client import Client
 from stravalib import unithelper
+# Pandas
+import pandas as pd
+# utilities
+from .utils import query_to_pandas, career_statistics
 from app import app, db, lm
+
 
 MY_STRAVA_CLIENT_ID = 7626
 MY_STRAVA_CLIENT_SECRET = '4b2e2887eb145e7e3bbeeaada7ee415ad19b9c92'
@@ -104,8 +109,12 @@ def dashboard():
             )
             db.session.add(activity)
             db.session.commit()
+    # grab activities and convert to dataframe
+    activities = Activity.query.filter_by(athlete_id=current_user.id)
+    activities = query_to_pandas(activities)
+    career = career_statistics(activities)
 
-    return render_template('dashboard.html')
+    return render_template('dashboard.html', career=career)
 
 @app.route('/')
 @app.route('/index')
