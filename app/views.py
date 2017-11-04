@@ -6,8 +6,10 @@ from .forms import LoginForm
 from .forms import SignupForm
 # models
 from .models import Athlete
+from .models import Activity
 # Strava
 from stravalib.client import Client
+from stravalib import unithelper
 from app import app, db, lm
 
 MY_STRAVA_CLIENT_ID = 7626
@@ -30,6 +32,23 @@ def logout():
 @app.route('/signup', methods=['GET','POST'])
 def signup():
     form = SignupForm()
+    if form.validate_on_submit():
+        name = form.name.data
+        athlete = Athlete.query.filter_by(name=name).first()
+        if athlete != None:
+            flash('Username already exists.',category='alert alert-warning')
+            return redirect(url_for('signup'))
+        else:
+            athlete = Athlete(
+                        name=name,
+                        password=form.password.data,
+                        token=session['token']
+                        )
+            db.session.add(athlete)
+            db.session.commit()
+            login_user(athlete, remember = form.remember_me.data)
+            return redirect(url_for('dashboard'))
+
     return render_template('signup.html', form=form)
 
 
@@ -60,6 +79,32 @@ def login():
 @app.route('/dashboard')
 @login_required
 def dashboard():
+    client = Client()
+    client.access_token = current_user.token
+    activities = client.get_activities()
+    for act in activities:
+        # check to see if activity is already written to local database
+        activity = Activity.query.filter_by(strava_id=act.id).first()
+        if activity == None:
+            act = client.get_activity(act.id)
+            # if not write to database
+            activity = Activity(
+                athlete_id = current_user.id,
+                bpm = act.average_heartrate,
+                strava_id = act.id,
+                distance = unithelper.miles(act.distance).get_num(),
+                elevation = unithelper.feet(act.total_elevation_gain).get_num(),
+                calories = act.calories,
+                speed = unithelper.miles_per_hour(act.average_speed).get_num(),
+                city = act.location_city,
+                state = act.location_state,
+                date = act.start_date_local,
+                act_type = act.type,
+                name = act.name
+            )
+            db.session.add(activity)
+            db.session.commit()
+
     return render_template('dashboard.html')
 
 @app.route('/')
@@ -74,7 +119,14 @@ def index():
             client_secret=MY_STRAVA_CLIENT_SECRET,
             code=code
             )
-        print('access token:',access_token)
+        # todo: check to see if token already exists in back end
+        # if it does take to the log in page and include message
+        # that account is already authorized.
+        athlete = Athlete.query.filter_by(token=access_token).first()
+        if athlete != None:
+            flash('Athlete already authorized. Please log in.',category='alert alert-success')
+            return redirect(url_for('login'))
+
         # store token in session variable for database write on sign up page
         session['token'] = access_token
         athlete = client.get_athlete()
