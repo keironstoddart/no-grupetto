@@ -2,8 +2,8 @@
 {% block content %}
 <div class=container>
   <h1>Dashboard</h1>
-  <p>Total rides made: {{career.count}}</p>
+  <p>Total rides: {{career.count}}</p>
   <p>Total miles biked: {{'{0:,.2f}'.format(career.distance)}} miles</p>
-  <p>Total elevation climbed: {{'{0:,.2f}'.format(career.elevation)}} miles</p>
+  <p>Total elevation climbed: {{'{0:,.2f}'.format(career.elevation)}} feet</p>
 </div>
 {% endblock %}

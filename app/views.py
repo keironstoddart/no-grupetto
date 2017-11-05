@@ -101,6 +101,7 @@ def dashboard():
                 elevation = unithelper.feet(act.total_elevation_gain).get_num(),
                 calories = act.calories,
                 speed = unithelper.miles_per_hour(act.average_speed).get_num(),
+                max_speed = unithelper.miles_per_hour(act.max_speed).get_num(),
                 city = act.location_city,
                 state = act.location_state,
                 date = act.start_date_local,

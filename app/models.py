@@ -36,6 +36,7 @@ class Activity(db.Model):
     elevation = db.Column(db.Float)
     calories = db.Column(db.Integer)
     speed = db.Column(db.Float)
+    max_speed = db.Column(db.Float)
     city = db.Column(db.String(64))
     state = db.Column(db.String(64))
     date = db.Column(db.DateTime)
