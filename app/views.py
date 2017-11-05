@@ -116,7 +116,7 @@ def dashboard():
     # grab activities and convert to dataframe
     activities = Activity.query.filter_by(athlete_id=current_user.id)
     activities = query_to_pandas(activities)
-    career = career_statistics(activities)
+    career = statistics(activities)
 
     return render_template('dashboard.html', career=career)
 

@@ -5,7 +5,7 @@ import pandas as pd
 def query_to_pandas(rset):
     """
     Turn a sqlalchemy query into a pandas dataframe
-    Argumens:
+    Arguments:
         - rset (sqlalchemy): sqlachemy returned object
     Returns
         - result (DataFrame): dataframe representation of returned objects
@@ -19,6 +19,13 @@ def query_to_pandas(rset):
     return result
 
 def second_formatter(seconds):
+    """
+    Convert seconds into a descriptive time duration string
+    Arguments:
+        - seconds (int): time duration in seconds
+    Returns
+        - description (str): articulation of time
+    """
     days, seconds = divmod(seconds, 86400)
     hours, seconds = divmod(seconds, 3600)
     minutes, seconds = divmod(seconds, 60)
@@ -31,7 +38,15 @@ def second_formatter(seconds):
     else:
         return '%d secs' % (seconds)
 
-def career_statistics(activities, enum='Ride'):
+def statistics(activities, enum='Ride'):
+    """
+    Take a dataframe of activities (see activity model for columns) and
+    compute a set of statistics
+    Arguments:
+        - activities (dataframe): dataframe of activities
+    Returns
+        - statistics (dictionary): stats on activities
+    """
     output = {}
     # filter out other types of activities
     activities = activities[activities['act_type'] == enum]
