@@ -2,6 +2,7 @@
 <!doctype html>
 <html>
 <head>
+  <script type="text/javascript" src="{{ url_for('static', filename='jquery-3.2.1.min.js') }}"></script>
   <link rel="stylesheet" mead='screen' href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
   <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
   {% block head %}
@@ -10,7 +11,9 @@
 </head>
 <nav class="navbar navbar-default navbar-static-top" style='background-color: #FF8633;' role="navigation">
   <div>
-    <a class="navbar-brand" href="/logout" style="font-family:menlo;color:white;">Log Out</a>
+    <a id='logout' class="navbar-brand" href="/logout" style="font-family:menlo;color:white;">Log Out</a>
+    <a id='dashboard' class="navbar-brand" href="/dashboard" style="font-family:menlo;color:white;">Dashboard</a>
+    <a id='data' class="navbar-brand" href="/data" style="font-family:menlo;color:white;">Data</a>
   </div>
 </nav>
 <body>

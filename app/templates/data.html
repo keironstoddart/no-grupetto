@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<script>
+  $(document).ready(function(){
+    $('#data').css('text-decoration','underline');
+  });
+</script>
+<div class=container>
+  <div class="row">
+    <div class="col-lg">
+      <h2>CSV</h2>
+      <a href="/push_data/csv/view" class="btn btn-warning" role="button">View</a>
+      <a href="/push_data/csv/download" class="btn btn-warning" role="button">Download</a>
+    </div>
+    <div class="col-lg">
+      <h2>JSON</h2>
+      <a href="/push_data/json/view" class="btn btn-warning" role="button">View</a>
+      <a href="/push_data/json/download" class="btn btn-warning" role="button">Download</a>
+    </div>
+  </div>
+  <hr>
+</div>
+
+</div>
+{% endblock %}

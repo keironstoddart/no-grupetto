@@ -62,4 +62,6 @@ def statistics(activities, enum='Ride'):
     # average time between every 10 rides
     ride_time_range = (most_recent_ride - earliest_ride).total_seconds()/len(activities)*10
     output['ride_density'] = second_formatter(ride_time_range)
+    output['max_bpm'] = max(activities['bpm'])
+    output['avg_bpm'] = activities['bpm'].mean()
     return output

@@ -1,5 +1,5 @@
 # flask
-from flask import render_template, flash, redirect, session, url_for, request, g
+from flask import render_template, flash, redirect, session, url_for, request, g, Response
 from flask_login import login_user, logout_user, current_user, login_required
 # forms
 from .forms import LoginForm
@@ -13,7 +13,7 @@ from stravalib import unithelper
 # Pandas
 import pandas as pd
 # utilities
-from .utils import query_to_pandas, career_statistics
+from .utils import query_to_pandas, statistics
 from app import app, db, lm
 
 
@@ -80,6 +80,31 @@ def login():
                 flash(u'Incorrect password, please try again.',category='alert alert-danger')
                 return redirect(url_for('login'))
     return render_template('login.html', form=form)
+
+@app.route('/push_data/<structure>/<how>')
+@login_required
+def push_data(structure='csv',how='view'):
+    activities = Activity.query.filter_by(athlete_id=current_user.id)
+    activities = query_to_pandas(activities)
+    if structure == 'csv':
+        data = activities.to_csv()
+        filename = 'data.csv'
+    else:
+        data = activities.to_json(orient='index')
+        filename = 'data.json'
+    if how == 'view':
+        return data
+    else:
+        return Response(
+        data,
+        mimetype="text/" + structure,
+        headers={"Content-disposition":
+                 "attachment; filename=" + filename})
+
+@app.route('/data')
+@login_required
+def data():
+    return render_template('data.html')
 
 def data_pull():
     client = Client()
