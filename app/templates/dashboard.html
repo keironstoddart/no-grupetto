@@ -2,8 +2,28 @@
 {% block content %}
 <div class=container>
   <h1>Dashboard</h1>
-  <p>Total rides: {{career.count}}</p>
-  <p>Total miles biked: {{'{0:,.2f}'.format(career.distance)}} miles</p>
-  <p>Total elevation climbed: {{'{0:,.2f}'.format(career.elevation)}} feet</p>
+  <div class="container">
+    <h2>Career</h2>
+  <div class="row">
+    <div class="col-lg">
+      <h4>Totals</h4>
+      <p>Total rides: {{career.count}}</p>
+      <p>Total miles biked: {{'{0:,.2f}'.format(career.distance)}} miles</p>
+      <p>Total elevation climbed: {{'{0:,.2f}'.format(career.elevation)}} feet</p>
+      <p>Total time spent: {{career.time}}</p>
+      <p>Max speed: {{'{0:,.2f}'.format(career.max_speed)}} miles per hour</p>
+    </div>
+    <div class="col-lg">
+      <h4>Average</h4>
+      <p>Ride Density <a href="#" title="Time it takes to do ten rides.">(?)</a>: {{career.ride_density}}</p>
+      <p>Miles per ride: {{'{0:,.2f}'.format(career.distance/career.count)}} miles</p>
+      <p>Feet climbed per ride: {{'{0:,.2f}'.format(career.elevation/career.count)}} miles</p>
+      <p>Time per ride: {{career.avg_time}}</p>
+      <p>Average speed: {{'{0:,.2f}'.format(career.speed)}} miles per hour</p>
+    </div>
+  </div>
+  <hr>
+</div>
+
 </div>
 {% endblock %}

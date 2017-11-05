@@ -18,6 +18,19 @@ def query_to_pandas(rset):
     result = pd.DataFrame(result)
     return result
 
+def second_formatter(seconds):
+    days, seconds = divmod(seconds, 86400)
+    hours, seconds = divmod(seconds, 3600)
+    minutes, seconds = divmod(seconds, 60)
+    if days > 0:
+        return '%d days %d hrs %d mins %d secs' % (days, hours, minutes, seconds)
+    elif hours > 0:
+        return '%d hrs %d mins %d secs' % (hours, minutes, seconds)
+    elif minutes > 0:
+        return '%d mins %d secs' % (minutes, seconds)
+    else:
+        return '%d secs' % (seconds)
+
 def career_statistics(activities, enum='Ride'):
     output = {}
     # filter out other types of activities
@@ -25,4 +38,13 @@ def career_statistics(activities, enum='Ride'):
     output['count'] = len(activities)
     output['distance'] = sum(activities['distance'])
     output['elevation'] = sum(activities['elevation'])
+    output['speed'] = activities['speed'].mean()
+    output['time'] = second_formatter(activities['time'].sum().total_seconds())
+    output['avg_time'] = second_formatter(activities['time'].mean().total_seconds())
+    output['max_speed'] = max(activities['max_speed'])
+    earliest_ride = min(activities['date'])
+    most_recent_ride = max(activities['date'])
+    # average time between every 10 rides
+    ride_time_range = (most_recent_ride - earliest_ride).total_seconds()/len(activities)*10
+    output['ride_density'] = second_formatter(ride_time_range)
     return output

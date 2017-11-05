@@ -81,9 +81,7 @@ def login():
                 return redirect(url_for('login'))
     return render_template('login.html', form=form)
 
-@app.route('/dashboard')
-@login_required
-def dashboard():
+def data_pull():
     client = Client()
     client.access_token = current_user.token
     activities = client.get_activities()
@@ -106,10 +104,15 @@ def dashboard():
                 state = act.location_state,
                 date = act.start_date_local,
                 act_type = act.type,
-                name = act.name
+                name = act.name,
+                time = act.moving_time
             )
             db.session.add(activity)
             db.session.commit()
+
+@app.route('/dashboard')
+@login_required
+def dashboard():
     # grab activities and convert to dataframe
     activities = Activity.query.filter_by(athlete_id=current_user.id)
     activities = query_to_pandas(activities)

@@ -42,6 +42,7 @@ class Activity(db.Model):
     date = db.Column(db.DateTime)
     act_type = db.Column(db.String(64))
     name = db.Column(db.String(64))
+    time = db.Column(db.Interval)
 
     def __repr__(self):
         return '<Activity %r>' % (self.strava_id)
